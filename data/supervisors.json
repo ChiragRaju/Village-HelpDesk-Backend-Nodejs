@@ -1,0 +1,19 @@
+[
+  {
+    "id": "1700386214293",
+    "name": "sachin",
+    "email": "sachin@gmail.com",
+    "phone": "9448203245",
+    "address": "opposite veternary hospital gulpete bengaluru 560037",
+    "role": "Help Desk Supervisor"
+  },
+  {
+    "id": "1700421409637",
+    "name": "Kamlesh",
+    "email": "kamesh123@g,mail.com",
+    "phone": "1234567890",
+    "address": "raju colony 2nd cross yemluru 560037",
+    "role": "Superviser Village desk"
+  }
+ 
+]
