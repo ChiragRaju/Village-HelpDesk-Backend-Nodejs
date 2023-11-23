@@ -1,9 +1,15 @@
+/**
+ * Class representing an Admin user
+ */
 class Admin {
-    constructor({ email, password }) {
-      this.email = email;
-      this.password = password;
-    }
+  /**
+   * Constructor for the Admin class
+   * @param {Object} param0 - Object containing admin properties
+   */
+  constructor({ email, password }) {
+    this.email = email;
+    this.password = password;
   }
-  
-  module.exports = Admin;
-  
+}
+
+module.exports = Admin;

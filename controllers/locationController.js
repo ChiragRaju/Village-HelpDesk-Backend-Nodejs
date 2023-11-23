@@ -4,6 +4,11 @@ const LocationModel = require('../models/locationModel');
 const nodemailer = require('nodemailer');
 
 class LocationController {
+  
+  /**
+   * Sends notifications to users based on their location and nearby issues.
+   * @param {Object} userLocation - The location data of the user containing latitude and longitude.
+   */
   static async sendNotifications(userLocation) {
     try {
       // Fetch issues from the API endpoint
@@ -43,6 +48,15 @@ class LocationController {
   }
 }
 
+  /**
+   * Calculates the distance between two sets of latitude and longitude coordinates.
+   * @param {number} lat1 - Latitude of the first location.
+   * @param {number} lon1 - Longitude of the first location.
+   * @param {number} lat2 - Latitude of the second location.
+   * @param {number} lon2 - Longitude of the second location.
+   * @returns {number} - The distance between the two locations in kilometers.
+   */
+
 function calculateDistance(lat1, lon1, lat2, lon2) {
   const R = 6371; // Radius of the earth in km
   const dLat = deg2rad(lat2 - lat1);
@@ -59,6 +73,13 @@ function deg2rad(deg) {
   return deg * (Math.PI / 180);
 }
 
+/**
+   * Sends an email notification to specified recipients.
+   * @param {string} to - Comma-separated email addresses of the recipients.
+   * @param {string} subject - The subject of the email.
+   * @param {string} text - The HTML content of the email.
+   * @returns {Promise<void>} - A promise indicating the success or failure of the email sending.
+   */
 async function sendEmail(to, subject, text) {
   const transporter = nodemailer.createTransport({
     service: 'chiragrajus2102@gmail.com',

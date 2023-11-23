@@ -1,30 +1,44 @@
+// issueController.js
+
 const Issue = require('../models/Issue');
+const fs = require('fs');
+const path = require('path');
 
+const dbPath = path.join(__dirname, '../data/Issues.json');
+
+/**
+ * Report a new issue
+ * @param {Object} req - Express request object with issue details in the body
+ * @param {Object} res - Express response object
+ */
 function reportIssue(req, res) {
-  
-  const { userId, description,latitude, longitude,city,state,suburb,display_name,postcode} = req.body;
+  const { userId, description, latitude, longitude, city, state, suburb, display_name, postcode } = req.body;
   const image = req.file ? req.file.filename : null;
-  
 
-  if ( !description) {
+  if (!description) {
     return res.status(400).json({ error: 'User ID and description are required.' });
   }
 
-  const newIssue = new Issue({ userId, description, image, latitude, longitude,city,state,suburb,display_name,postcode });
+  const newIssue = new Issue({ userId, description, image, latitude, longitude, city, state, suburb, display_name, postcode });
   const savedIssue = newIssue.save();
 
   res.status(201).json({ message: 'Issue reported successfully', issue: savedIssue });
 }
 
-// function getIssuesByUserId(userId) {
-//   const issues = Issue.findByUserId(userId);
-//   return issues;
-// }
+/**
+ * Get all issues
+ * @returns {Array} - Array of all issues
+ */
 function getAllIssues() {
   const issues = Issue.getAllIssues(); // Implement this method in your Issue model
   return issues;
 }
 
+/**
+ * Check the status of issues for a specific user
+ * @param {Object} req - Express request object with user ID in the params
+ * @param {Object} res - Express response object
+ */
 function checkIssueStatus(req, res) {
   const { userId } = req.params;
 
@@ -38,8 +52,6 @@ function checkIssueStatus(req, res) {
     return res.status(404).json({ error: 'No issues found for the user.' });
   }
 
- 
-
   const response = {
     userIssues: userIssues.map((issue) => ({
       issueId: issue.id,
@@ -52,11 +64,12 @@ function checkIssueStatus(req, res) {
 
   res.json(response);
 }
-const fs = require('fs');
-const path = require('path');
 
-const dbPath = path.join(__dirname, '../data/Issues.json');
-
+/**
+ * Update the status of an issue for a specific user
+ * @param {Object} req - Express request object with user ID and issue ID in the params, and new status in the body
+ * @param {Object} res - Express response object
+ */
 function updateIssueStatus(req, res) {
   const { userId, issueId } = req.params;
   const { newStatus } = req.body;
@@ -83,5 +96,4 @@ function updateIssueStatus(req, res) {
   res.json({ message: 'Status updated successfully', updatedIssues: userIssues });
 }
 
-
-module.exports = { reportIssue,getAllIssues,checkIssueStatus,updateIssueStatus};
+module.exports = { reportIssue, getAllIssues, checkIssueStatus, updateIssueStatus };

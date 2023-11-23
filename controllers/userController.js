@@ -1,4 +1,3 @@
-
 const jwt = require("jsonwebtoken");
 const config = require("../config/config.js");
 const bcrypt = require("bcrypt");
@@ -9,29 +8,35 @@ const nodemailer = require('nodemailer');
 
 const dbPath = path.join(__dirname, "../data/users.json");
 
-
-
-
+/**
+ * Handles user registration.
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 function signup(req, res) {
-  const { email,phoneNumber, password, state, pincode, city, firstName, lastName } = req.body;
+  const { email, phoneNumber, password, state, pincode, city, firstName, lastName } = req.body;
 
-  if (!firstName || !lastName||!email||!phoneNumber || !password ||  !state || !city || !pincode   ) {
+  if (!firstName || !lastName || !email || !phoneNumber || !password || !state || !city || !pincode) {
     return res.status(400).json({ error: "All required fields must be provided." });
   }
 
   const existingUser = User.findUserByEmail(email);
-  console.log("HI SIGNED UP")         
 
   if (existingUser) {
     return res.status(400).json({ error: "User with the provided phone number already exists." });
   }
 
-  const newUser = User.createUser( firstName, lastName,email,phoneNumber, password, state,city, pincode );
+  const newUser = User.createUser(firstName, lastName, email, phoneNumber, password, state, city, pincode);
   const token = generateToken(newUser);
 
   res.status(201).json({ message: "User registered successfully.", token });
 }
 
+/**
+ * Handles user login.
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 function login(req, res) {
   const { email, password } = req.body;
   const user = User.findUserByEmail(email);
@@ -48,6 +53,11 @@ function login(req, res) {
   }
 }
 
+/**
+ * Generates a JWT token for a user.
+ * @param {Object} user - User object.
+ * @returns {string} JWT token.
+ */
 function generateToken(user) {
   return jwt.sign(
     { id: user.id, email: user.email },
@@ -57,6 +67,12 @@ function generateToken(user) {
     }
   );
 }
+
+/**
+ * Sends an OTP to the user's email for password reset.
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 function forgotPassword(req, res) {
   const { email } = req.body;
 
@@ -74,16 +90,18 @@ function forgotPassword(req, res) {
   const otp = generateOTP();
   user.resetPasswordOTP = otp;
 
-  // Save the OTP to the users.json file
   saveUsers(users);
 
-  // Send OTP email (replace with your email sending logic)
   sendOtpEmail(email, otp);
 
   res.status(200).json({ message: "OTP sent successfully." });
 }
 
-
+/**
+ * Resets the user's password using the provided OTP.
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 function resetPassword(req, res) {
   const { email, otp, newPassword } = req.body;
 
@@ -98,20 +116,27 @@ function resetPassword(req, res) {
     return res.status(401).json({ error: 'Invalid OTP.' });
   }
 
-  // Update the password and remove the resetPasswordOTP field
   user.password = bcrypt.hashSync(newPassword, 10);
   delete user.resetPasswordOTP;
 
-  // Save the updated data to the users.json file
   saveUsers(users);
 
   res.status(200).json({ message: 'Password reset successfully.' });
 }
+
+/**
+ * Generates a random 6-digit OTP.
+ * @returns {string} 6-digit OTP.
+ */
 function generateOTP() {
   return Math.floor(100000 + Math.random() * 900000).toString();
 }
 
-// Placeholder function for sending OTP email (replace with your email sending logic)
+/**
+ * Sends an email containing the OTP for password reset.
+ * @param {string} email - User's email address.
+ * @param {string} otp - 6-digit OTP.
+ */
 function sendOtpEmail(email, otp) {
   const transporter = nodemailer.createTransport({
     service: "Gmail",
@@ -120,7 +145,6 @@ function sendOtpEmail(email, otp) {
       pass: "cfntzqatbcxgfffn",
     },
   });
-  
 
   const mailOptions = {
     from: 'chiragrajus2102@gmail.com',
@@ -138,6 +162,10 @@ function sendOtpEmail(email, otp) {
   });
 }
 
+/**
+ * Retrieves user data from the file.
+ * @returns {Array} Array of user objects.
+ */
 function getUsers() {
   try {
     const data = fs.readFileSync(dbPath, "utf-8");
@@ -147,8 +175,12 @@ function getUsers() {
   }
 }
 
+/**
+ * Saves user data to the file.
+ * @param {Array} users - Array of user objects.
+ */
 function saveUsers(users) {
   fs.writeFileSync(dbPath, JSON.stringify(users, null, 2));
 }
 
-module.exports = { signup, login,forgotPassword, resetPassword};
+module.exports = { signup, login, forgotPassword, resetPassword };
