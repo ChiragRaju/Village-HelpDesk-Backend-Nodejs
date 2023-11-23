@@ -1,43 +1,5 @@
 [
-  {
-    "id": "457b2f94-38bc-43fa-936f-b2787ad48a2a",
-    "firstName": "Chiragraju",
-    "lastName": "S",
-    "email": "chiragrajus2102@gmail.com",
-    "phoneNumber": "82965467572",
-    "password": "$2b$10$Ong7Rq.4iWeJZYDLVZQlPOz1UkqfUYmE2FCvYVJ3TFJNow1TQePmi",
-    "aadharCard": "ewrwerewrew",
-    "state": "ww",
-    "city": "dsad",
-    "pincode": "563101"
-  },
-  {
-    "id": "5a966730-7da6-4e5f-b5e4-f2bfe732d160",
-    "firstName": "chiru",
-    "lastName": "s",
-    "email": "chiru",
-    "phoneNumber": "8296546757",
-    "password": "$2b$10$ghRduvrpwvlXru5QYWa3C.D36BLEN3kt8528/LumBbROpcLc26MXe",
-    "aadharCard": "540018090216",
-    "state": "mumbai",
-    "city": "kolar",
-    "pincode": "12312",
-    "resetPasswordOTP": null
-  },
-  {
-    "id": "d5cc6d59-480b-49ad-b4ac-37ad4688dc0f",
-    "firstName": "chiragraju",
-    "lastName": "s",
-    "email": "chis19is@cmrit.ac.in",
-    "phoneNumber": "7411930766",
-    "password": "$2b$10$tfhMr6pfJOHqgYJ8byPN..J0yxuRHzddIsKAvQQzj9yhBigvaewXa",
-    "aadharCard": "540018090216",
-    "state": "karnataka",
-    "city": "kolar",
-    "pincode": "563101",
-    "resetPasswordOTP": "Gl4K",
-    "resetPasswordOTPExpiration": "2023-11-03T08:06:28.175Z"
-  },
+  
   {
     "id": "71b75eb9-4cf1-4d5f-b241-60c3872055db",
     "firstName": "vivek",
@@ -45,7 +7,6 @@
     "email": "vivekkumarava1@gmail.com",
     "phoneNumber": "12345656788",
     "password": "$2b$10$X/3vFIO4qpN1E43CVfnaee/0LDzsduo/lnRiXiJhNfEpCfi66bf0G",
-    "aadharCard": "540018090216",
     "state": "karnataka",
     "city": "bengaluru",
     "pincode": "563101"
@@ -57,7 +18,6 @@
     "email": "chiragrajus2002@gmail.com",
     "phoneNumber": "8296546757",
     "password": "$2b$10$Wo4Q.ziLhN7kldn0DDmBY.nlPcziz/mtfzGT14ANu/IW2D8f2ruRC",
-    "aadharCard": "540018090216",
     "state": "karnataka",
     "city": "kolar",
     "pincode": "563101",
@@ -70,7 +30,6 @@
     "email": "sachinmishra83742@gmail.com",
     "phoneNumber": "7398040710",
     "password": "$2b$10$zA8Ru13/TI.RSaZvPbNFLOtDwRWo5sFBCh0yOuH0QGtFdxk9OEykW",
-    "aadharCard": "5400 1809 0216",
     "state": "karnataka",
     "city": "bengaluru",
     "pincode": "563101",
