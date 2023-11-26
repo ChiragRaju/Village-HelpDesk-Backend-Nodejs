@@ -22,28 +22,27 @@ class LocationController {
           userLocation.longitude,
           issue.latitude,
           issue.longitude
+          
         );
 
         // Assuming 1km radius
         return distance <= 1;
       });
+    
 
       if (filteredLocations.length === 0) {
         console.log("No issues within 1km radius");
-        return;
+        // Return a response indicating no issues were found
+        return { success: true, message: "No issues within 1km radius" };
       }
 
       const emailAddresses = filteredLocations
         .map((issue) => issue.userId)
         .join(",");
+        
 
       // Include issueId and description in the email message
-      const message = filteredLocations
-        .map(
-          (issue) =>
-            `Issue ID: ${issue.id}, Description: ${issue.description}, Description: ${issue.display_name}`
-        )
-        .join("<br>");
+      const message = `The following issue has been resolved. Please kindly give feedback.\nIssue ID: ${filteredLocations[0].id}, Description: ${filteredLocations[0].description}, Display Name: ${filteredLocations[0].display_name}`;
 
       // Send a single email to all filtered locations
       await sendEmail(emailAddresses, "Location Notifications", message);
@@ -75,12 +74,16 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
       Math.sin(dLon / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   const distance = R * c; // Distance in km
+  console.log(`Distance between the two points: ${distance.toFixed(2)} km`);
   return distance;
+ 
 }
 
 function deg2rad(deg) {
   return deg * (Math.PI / 180);
 }
+
+
 
 /**
  * Sends an email notification to specified recipients.

@@ -16,11 +16,10 @@
     "lastName": "S",
     "email": "chiragrajus2002@gmail.com",
     "phoneNumber": "8296546757",
-    "password": "$2b$10$Wo4Q.ziLhN7kldn0DDmBY.nlPcziz/mtfzGT14ANu/IW2D8f2ruRC",
+    "password": "$2b$10$KlIsQ.zQtJGKq7dHyujnmeZRgEOWBelzrfMIKLodd6JOThB0H5lD2",
     "state": "karnataka",
     "city": "kolar",
-    "pincode": "563101",
-    "resetPasswordOTP": "787139"
+    "pincode": "563101"
   },
   {
     "id": "3966764d-3189-4019-ae1d-05b681929248",
