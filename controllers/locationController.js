@@ -42,7 +42,7 @@ class LocationController {
         
 
       // Include issueId and description in the email message
-      const message = `The following issue has been resolved. Please kindly give feedback.\nIssue ID: ${filteredLocations[0].id}, Description: ${filteredLocations[0].description}, Display Name: ${filteredLocations[0].display_name}`;
+      const message = `The following issue has been resolved. Please kindly Login and give feedback.\nIssue ID: ${filteredLocations[0].id}, Description: ${filteredLocations[0].description}, Address: ${filteredLocations[0].display_name}`;
 
       // Send a single email to all filtered locations
       await sendEmail(emailAddresses, "Location Notifications", message);
@@ -61,6 +61,7 @@ class LocationController {
  * @param {number} lon2 - Longitude of the second location.
  * @returns {number} - The distance between the two locations in kilometers.
  */
+
 
 function calculateDistance(lat1, lon1, lat2, lon2) {
   const R = 6371; // Radius of the earth in km
@@ -103,9 +104,9 @@ async function sendEmail(to, subject, text) {
 
   const mailOptions = {
     from: "chiragrajus2102@gmail.com",
-    to, // Join the array of recipients with commas
+    to, 
     subject: "Issue as Been Resolved Of Your Issue",
-    html: text, // Use html to render line breaks
+    html: text, 
   };
 
   return transporter.sendMail(mailOptions);
